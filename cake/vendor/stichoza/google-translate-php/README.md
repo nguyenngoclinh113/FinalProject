@@ -156,6 +156,12 @@ And use:
 $tr->setTokenProvider(new MyTokenGenerator);
 ```
 
+### Translation Client (Quality)
+
+Google Translate has a parameter named `client` which defines quality of translation. First it was set to `webapp` but later google added `gtx` value which results in a better translation quality in terms of grammar and overall meaning of sentences.
+
+You can use `->setClient()` method to switch between clients. For example if you want to use older version of translation algorithm, type `$tr->setClient('webapp')->translate('lorem ipsum...')`. Default value is `gtx`.
+
 ### Errors and Exception Handling
 
 Static method `trans()` and non-static `translate()` and `getResponse()` will throw following Exceptions:
@@ -167,10 +173,15 @@ In addition, `translate()` and `trans()` methods will return `null` if there is 
 
 ## Known Limitations
  
- - `503 Service Unavailable` response:  
+ - `503 Service Unavailable` response:
    If you are getting this error, it is most likely that Google has banned your external IP address and/or [requires you to solve a CAPTCHA](https://github.com/Stichoza/google-translate-php/issues/18). This is not a bug in this package. Google has become stricter, and it seems like they keep lowering the number of allowed requests per IP per a certain amount of time. Try sending less requests to stay under the radar, or change your IP frequently ([for example using proxies](#http-client-configuration)). Please note that once an IP is banned, even if it's only temporary, the ban can last from a few minutes to more than 12-24 hours, as each case is different.
- - `413 Request Entity Too Large` response:  
+ - `429 Too Many Requests` response:
+   This error is basically the same as explained above.
+ - `413 Request Entity Too Large` response:
    This error means that your input string is too long. Google only allows a maximum of 5000 characters to be translated at once. If you want to translate a longer text, you can split it to shorter parts, and translate them one-by-one.
+ - `403 Forbidden` response:
+   This is not an issue with this package. Google Translate itself has some problems when it comes to translating some characters and HTML entities. See https://github.com/Stichoza/google-translate-php/issues/119#issuecomment-558078133
+
  
 ## Disclaimer
 

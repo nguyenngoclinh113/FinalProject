@@ -20,14 +20,13 @@ class User extends Authenticatable
         'name', 'email', 'password', 'gender', 'phone', 'address', 'is_admin', 'status'
     ];
     protected $date = ['deleted_at'];
-
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'remember_token', 'google_id'
     ];
 
 

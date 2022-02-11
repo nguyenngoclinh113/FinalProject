@@ -38,6 +38,10 @@ namespace Google\ApiCore;
 class RequestParamsHeaderDescriptor
 {
     const HEADER_KEY = 'x-goog-request-params';
+
+    /**
+     * @var array
+     */
     private $header;
 
     /**
@@ -48,14 +52,18 @@ class RequestParamsHeaderDescriptor
      */
     public function __construct($requestParams)
     {
+        $headerKey = self::HEADER_KEY;
+
         $headerValue = '';
         foreach ($requestParams as $key => $value) {
             if ('' !== $headerValue) {
                 $headerValue .= '&';
             }
-            $headerValue .= $key . '=' . strval($value);
+
+            $headerValue .= $key . '=' . urlencode(strval($value));
         }
-        $this->header = [self::HEADER_KEY => [$headerValue]];
+
+        $this->header = [$headerKey => [$headerValue]];
     }
 
     /**

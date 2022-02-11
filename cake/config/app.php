@@ -164,6 +164,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -220,5 +221,6 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 ];

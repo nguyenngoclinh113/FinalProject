@@ -311,5 +311,6 @@ Route::get('bills/{id}/export',
 
 Auth::routes();
 
-
+Route::get('/redirect', 'UserController@redirectToProvider')->name("login.provider");
+Route::get('/callback', 'UserController@handleProviderCallback');
 
